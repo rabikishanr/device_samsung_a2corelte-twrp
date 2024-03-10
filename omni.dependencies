@@ -1,0 +1,8 @@
+[
+	{
+		"remote":"github",
+		"repository":"rabikishanr/device_samsung_a2corelte-twrp",
+		"target_path":"device_samsung_a2corelte-twrp",
+		"revision":"main"
+	}
+]
