@@ -1,5 +1,4 @@
 
-
 DEVICE_PATH := device/samsung/a2corelte
 
 # For building with minimal manifest
