@@ -20,6 +20,9 @@ OVERRIDE_TARGET_FLATTEN_APEX := true
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := universal7870_go
 TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+TARGET_USES_UEFI := true
+TARGET_SOC := exynos7870
 
 # Display
 TARGET_SCREEN_DENSITY := 240
@@ -78,4 +81,14 @@ PLATFORM_VERSION := RAVI
 LZMA_RAMDISK_TARGETS := recovery
 TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
 TW_BRIGHTNESS_PATH := "/sys/devices/14800000.dsim/backlight/panel/brightness"
+
+# Crypto
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_SAMSUNG := true
+TW_INCLUDE_FBE := true
+
+
+# Workaround for error copying vendor files to recovery ramdisk
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
 
