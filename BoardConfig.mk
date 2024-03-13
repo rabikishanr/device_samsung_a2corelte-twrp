@@ -95,3 +95,5 @@ TW_INCLUDE_FBE := true
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
 
+# SELinux Policies
+BOARD_SEPOLICY_DIRS := device/samsung/a2corelte/sepolicy
