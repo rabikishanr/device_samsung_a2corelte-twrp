@@ -7,7 +7,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/omni/config/common.mk)
 
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/prebuilt/kernel:kernel \
+     $(LOCAL_PATH)/prebuilt/Image:Image \
      $(LOCAL_PATH)/prebuilt/dt.img:dt.img \
      $(LOCAL_PATH)/prebuilt/dt.img:boot.img
 
