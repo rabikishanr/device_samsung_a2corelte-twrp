@@ -32,7 +32,7 @@ BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive androidboot.selinux=permi
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/a2corelte/prebuilt/dt.img --board SRPOL10A000RU
-BOARD_KERNEL_IMAGE_NAME := kernel
+BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_KERNEL_CONFIG := a2corelte_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/a2corelte
 BOARD_CUSTOM_BOOTIMG_MK :=  $(DEVICE_PATH)/mkbootimg.mk
@@ -41,7 +41,7 @@ BOARD_CUSTOM_BOOTIMG_MK :=  $(DEVICE_PATH)/mkbootimg.mk
 TARGET_FORCE_PREBUILT_KERNEL := true
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/kernel
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
 TARGET_PREBUILT_DT := $(DEVICE_PATH)/prebuilt/dt.img
 
 
