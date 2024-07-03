@@ -44,8 +44,8 @@ BOARD_CACHEIMAGE_PARTITION_SIZE    := 0x00C800000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 TARGET_PREBUILT_KERNEL := device/samsung/a2corelte/Image
-TARGET_PREBUILT_DTB := device/samsung/a2corelte/dtb.img
-TARGET_PREBUILT_DT := device/samsung/a2corelte/dt.img
+TARGET_PREBUILT_DTB := device/samsung/a2corelte/dt.img
+
 
 # Use this flag if the board has a ext4 partition larger than 2gb
 BOARD_HAS_LARGE_FILESYSTEM := true
