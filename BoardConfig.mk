@@ -1,99 +1,84 @@
+USE_CAMERA_STUB := true
 
-DEVICE_PATH := device/samsung/a2corelte
-
-# For building with minimal manifest
-ALLOW_MISSING_DEPENDENCIES := true
-
-# Architecture
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := generic
-
-TARGET_USES_64_BIT_BINDER := true
-
-# APEX
-OVERRIDE_TARGET_FLATTEN_APEX := true
-
-# Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := universal7870_go
 TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
-TARGET_USES_UEFI := true
-TARGET_SOC := exynos7870
-
-# Display
-TARGET_SCREEN_DENSITY := 240
-
-# Kernel
-BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive androidboot.selinux=permissive
-BOARD_RAMDISK_OFFSET := 0x01000000
-BOARD_KERNEL_TAGS_OFFSET := 0x00000100
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --dt device/samsung/a2corelte/prebuilt/dt.img --board SRPOL10A000RU
-BOARD_KERNEL_IMAGE_NAME := Image
-TARGET_KERNEL_CONFIG := a2corelte_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/a2corelte
-BOARD_CUSTOM_BOOTIMG_MK :=  $(DEVICE_PATH)/mkbootimg.mk
-
-# Kernel - prebuilt
-TARGET_FORCE_PREBUILT_KERNEL := true
-BOARD_KERNEL_BASE := 0x10000000
-BOARD_KERNEL_PAGESIZE := 2048
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
-TARGET_PREBUILT_DT := $(DEVICE_PATH)/prebuilt/dt.img
-
+TARGET_BOOTLOADER_BOARD_NAME := universal7870
 
 # Platform
 TARGET_BOARD_PLATFORM := exynos5
+TARGET_BOARD_PLATFORM_GPU := mali-t830mp2
 
-# Recovery
+# Flags
+#TARGET_GLOBAL_CFLAGS +=
+#TARGET_GLOBAL_CPPFLAGS +=
+#COMMON_GLOBAL_CFLAGS +=
+
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 :=
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_SMP := true
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := generic
+
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_USES_UNCOMPRESSED_KERNEL := true
+
+BOARD_KERNEL_CMDLINE := # Exynos doesn't take cmdline arguments from boot image
+BOARD_KERNEL_BASE := 0x10000000
+BOARD_KERNEL_PAGESIZE := 2048
+# 000RU = recovery kernel, 000KU = system kernel
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100 --board FPRPGTAX000RU
+
+BOARD_BOOTIMAGE_PARTITION_SIZE     := 0x002000000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x002600000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 0x0BB800000
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x2CF3FB000 # 0x2CF400000 - 20480 (footer)
+BOARD_CACHEIMAGE_PARTITION_SIZE    := 0x00C800000
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+TARGET_PREBUILT_KERNEL := device/samsung/a2corelte/Image
+TARGET_PREBUILT_DTB := device/samsung/a2corelte/dtb.img
+
+# Use this flag if the board has a ext4 partition larger than 2gb
+BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
-# Security patch level
-VENDOR_SECURITY_PATCH := 2021-08-01
-
-# Hack: prevent anti rollback
-PLATFORM_SECURITY_PATCH := 2099-12-31
-VENDOR_SECURITY_PATCH := 2099-12-31
-PLATFORM_VERSION := 16.1.0
-
+BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_CUSTOM_BOOTIMG_MK :=  device/samsung/a2corelte/bootimg.mk
 
 # TWRP specific build flags
-RECOVERY_VARIANT := twrp
 TW_THEME := portrait_hdpi
 RECOVERY_SDCARD_ON_DATA := true
-TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
+#BOARD_HAS_NO_REAL_SDCARD := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/13600000.usb/13600000.dwc3/gadget/lun%d/file"
 TW_BRIGHTNESS_PATH := "/sys/devices/14800000.dsim/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 153
+TW_DEFAULT_BRIGHTNESS := 162
 TW_NO_REBOOT_BOOTLOADER := true
 TW_HAS_DOWNLOAD_MODE := true
-TW_INCLUDE_NTFS_3G := true
+TW_NO_EXFAT_FUSE := true
+TW_MTP_DEVICE := "/dev/mtp_usb"
 TW_EXCLUDE_SUPERSU := true
-TW_EXTRA_LANGUAGES := true
-TW_USE_NEW_MINADBD := true
-TW_USE_TOOLBOX := true
-TW_EXCLUDE_TWRPAPP := true
-TW_NO_LEGACY_PROPS := true
-BOARD_SUPPRESS_SECURE_ERASE := true
-PLATFORM_SECURITY_PATCH := 2069-04-20
-PLATFORM_VERSION := 16.1.0
-LZMA_RAMDISK_TARGETS := recovery
 TW_DEVICE_VERSION := Rabikishan Rauniyar
+TW_EXTRA_LANGUAGES := true
+LZMA_RAMDISK_TARGETS := recovery
+BOARD_SUPPRESS_SECURE_ERASE := true
 
-# Crypto
+# Color fix
+TARGET_RECOVERY_PIXEL_FORMAT := "ABGR_8888"
+
+# Encryption support
 TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_SAMSUNG := true
-TW_INCLUDE_FBE := true
+#TW_INCLUDE_CRYPTO_SAMSUNG := true
+#TARGET_HW_DISK_ENCRYPTION := true
 
-
-# Workaround for error copying vendor files to recovery ramdisk
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_VENDOR := vendor
-
-# SELinux Policies
-BOARD_SEPOLICY_DIRS := device/samsung/a2corelte/sepolicy
+# Debug flags
+#TWRP_INCLUDE_LOGCAT := true
+#TARGET_USES_LOGD := true
